@@ -2,33 +2,31 @@
   <div class="position-sticky pt-3 sidebar-sticky">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">
+        <a class="nav-link active" aria-current="page" [routerLink]="['/dashboard']">
           <span data-feather="home" class="align-text-bottom"></span>
-          Clientes
+          Dashboard
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file" class="align-text-bottom"></span>
+        <a class="nav-link" [routerLink]="['/usuario']">
+          <span data-feather="shopping-cart" class="align-text-bottom"></span>
+          Usuario
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/productos']">
+          <span data-feather="users" class="align-text-bottom"></span>
+          productos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/Favoritos']">
+          <span data-feather="bar-chart-2" class="align-text-bottom"></span>
           Favoritos
         </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="shopping-cart" class="align-text-bottom"></span>
-          Productos
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="users" class="align-text-bottom"></span>
-          Guardados
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" [routerLink]="['/Reportes/PQR']">
           <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-          Reportes
+          Reportes/PQR
         </a>
     </ul>
 
