@@ -17,7 +17,7 @@ mysqli_query($conexion, $ins) or die ('No inserto');
 class result {}
 
 $response = new Result ();
-$response -> resultado = 'Ok';
+$response -> resultado = 'OK';
 $response -> mensaje = 'Datos grabados';
 
 header('Content-Type: application/json');

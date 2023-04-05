@@ -11,7 +11,7 @@ export class UsuarioService {
   constructor(private http:HttpClient) { }
 
   consultar () {
-    return this.http.get(`${this.url}Consulta.php`);
+    return this.http.get (`${this.url}Consulta.php`, { responseType: 'json'});
   }
   insertar(articulo:any){
     return this.http.post(`${this.url}insertar.php`, JSON.stringify(articulo));

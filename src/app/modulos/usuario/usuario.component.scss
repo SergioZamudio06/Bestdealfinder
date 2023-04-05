@@ -1,9 +1,18 @@
 input, select, button{
-margin-top: 10px;
-border-width: 1px;
-border-style: solid;
-border-color:gray;
+  margin-top: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color:rgb(96, 96, 158);
 
-}
+  }
 
+  .editar{
+    color: blue;
+    cursor:pointer;
+  }
+
+  .eliminar{
+    color: red;
+    cursor: pointer;
+  }
 

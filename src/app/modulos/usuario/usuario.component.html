@@ -1,75 +1,89 @@
 <h1>USUARIOS</h1>
-<button class="btn btn-primary">Insertar Usuario</button><br><br>
-<div id="formulario">
-<div class="row">
+<button class="btn btn-primary" (click)="mostrar(1)">INSERTAR USUARIO</button><br><br>
 
-  <div class="col-lg-6">
-    <select id="Tipo" class="form-control form-select">
-      <option value="Administrador" label="Administrador">Administrador</option>
-      <option value="General" label="General">General</option>
-    </select>
-    </div>
-
-  <div class="col-lg-6">
-    <input type="text" id="nombre" class="form-control" placeholder="Nombre">
-  </div>
-
-  <div class="col-lg-6">
-    <input type="email" id="correo" class="form-control" placeholder="Correo Electronico">
-    </div>
-  </div>
-
-
+<form id="formulario"*ngIf="verf==true" [formGroup]="form">
   <div class="row">
 
-    <div class="col-lg-6"></div>
-    <input type="password" id="clave" class="form-control" placeholder="Contraseña">
+    <div class="col-lg-6">
+      <select id="Tipo" class="form-control form-select"formControlName="Tipo_usuario" placeholder="Tipo">
+        <option value="" label="Tipo de Usuario">Tipo de Usuario</option>
+        <option value="Administrador" label="Administrador">Administrador</option>
+        <option value="General" label="General">General</option>
+      </select>
+      </div>
+      <div class="col-lg-6">
+        <input type="text" id="Nombre" class="form-control" placeholder="Nombre" formControlName="Nombre">
+      </div>
 
+
+
+    <div class="col-lg-6">
+      <input type="email" id="Correo" class="form-control" placeholder="Correo Electronico"formControlName="Correo" >
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-6"></div>
+      <input type="password" id="Clave" class="form-control" placeholder="Contraseña"formControlName="Clave">
+
+    </div>
+
+    <div class="col-lg-6">
+      <input type="tel" id="Celular" class="form-control" placeholder="Ingrese numero telefonico"formControlName="Celular">
+    </div>
+
+    <div class="col-lg-6">
+      <input type="text" id="Direccion" class="form-control" placeholder="Direccion"formControlName="Direccion">
+    </div>
+
+  </form>
+
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-3">
+  <button class="btn btn-primary" (click)="ingresar()" [disabled]="enviando">Guardar</button>
   </div>
 
-  <div class="col-lg-6">
-    <input type="tel" id="Celular" class="form-control" placeholder="Ingrese numero telefonico">
-  </div>
-
-  <div class="col-lg-6">
-    <input type="text" id="Direccion" class="form-control" placeholder="Direccion">
-  </div>
-
+  <div class="col-lg-3">
+  <button class="btn btn-secondary"(click)="mostrar(0)">Cancelar </button>
 </div>
+  <div class="col-lg-3"></div>
+  </div>
 
-<div class="row">
-  <div class="col-lg-3"></div>
-  <div class="col-lg-3"></div>
-<button class="btn btn-primary">Guardar</button>
-<button class="btn btn-secondary">Cancelar </button>
-  <div class="col-lg-3"></div>
-  <div class="col-lg-3"></div>
 
-</div>
 
-<br>
+
+
+<br><br>
 <div class="table-responsive">
   <table class="table table-success table-striped" border="1">
    <tr>
-    <th>Tipo de Usuario</th>
+    <th>Tipo_usuario</th>
     <th>Nombre</th>
-    <th>correo</th>
+    <th>Correo</th>
     <th>Celular</th>
     <th>Direccion</th>
     <th>Acciones</th>
-   </tr>
-   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>
 
+  </tr>
+  <!-- //mostrar los usuarios -->
+   <tr *ngFor="let item of usuario">
+
+    <td>{{item.Tipo_usuario}}</td>
+
+
+    <td>{{item.Nombre}}</td>
+    <td>{{item.Correo}}</td>
+    <td>{{item.Celular}}</td>
+    <td>{{item.Direccion}}</td>
+
+    <td>
+      <span class="editar"><i class="fa-solid fa-pen-to-square"></i></span>
+      <span (click)="pregunta(item.id_usuario,item.Nombre)" class="eliminar"><i class="fa-solid fa-trash"></i></span>
     </td>
-    Editar
-    -
-    Eliminar
+
    </tr>
   </table>
 </div>
+

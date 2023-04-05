@@ -5,6 +5,7 @@ import { LoginComponent } from './modulos/login/login.component';
 import { PrincipalComponent } from './modulos/principal.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
 
+
 const routes: Routes = [
   {
     path: "", component: PrincipalComponent,
