@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -12,6 +13,7 @@ export class UsuarioComponent implements OnInit {
   //variables globales
   verf = false;
   usuario: any;
+  iduser:any;
   user ={
     Tipo_usuario:"",
     Nombre:"",
@@ -22,6 +24,7 @@ export class UsuarioComponent implements OnInit {
   };
   enviando= false;
   form!: FormGroup;
+  beditar = false;
 
   constructor(
     private userservice:UsuarioService,
@@ -45,6 +48,9 @@ export class UsuarioComponent implements OnInit {
     switch(dato){
     case 0:
     this.verf = false;
+    this.beditar = false;
+    this.iduser = "";
+    this.limpiar();
     break;
     case 1:
     this.verf = true;
@@ -63,16 +69,15 @@ export class UsuarioComponent implements OnInit {
 
   consulta(){
     this.userservice.consultar().subscribe((result:any) => {
-    this.usuario= result;
-        //console.log(this.usuario);
-     })
-
-    }
+      this.usuario=[];
+      this.usuario=result;
+    })
+  }
 
   ingresar(){
     this.enviando=true;
     if(this.form.valid){
-      this.userservice.insertar(this.form).subscribe((datos:any) => {
+      this.userservice.insertar(this.form.value).subscribe((datos:any) => {
         console.log(datos);
         if(Object.prototype.hasOwnProperty.call(datos, 'resultado') && datos.resultado === 'OK'){
           //alert(datos['mensaje']);
@@ -88,7 +93,6 @@ export class UsuarioComponent implements OnInit {
       var mensaje= "Formulario no es valido\n"
       mensaje+= JSON.stringify(errors)
       alert(mensaje)
-
     }
   }
 
@@ -122,6 +126,36 @@ borrarusuario(id:any){
       }
     });
   }
+
+
+cargardatos(datos:any,id:number){
+  console.log(datos);
+  this.form.controls['Tipo_usuario'].setValue(datos.Tipo_usuario);
+  this.form.controls ['Nombre'].setValue(datos.Nombre);
+  this.form.controls['Correo'].setValue(datos.Correo);
+  this.form.controls['Clave'].setValue(datos.Clave);
+  this.form.controls['Celular'].setValue(datos.Celular);
+  this.form.controls['Direccion'].setValue(datos.Direccion);
+  this.iduser = id;
+  this.mostrar(1);
+  this.beditar=true;
+  }
+
+  editar(){
+    this.enviando=true;
+    if(this.form.valid){
+      this.userservice.edit(this.form.value, this.iduser).pipe(first()).subscribe((datos:any) => {
+        if(Object.prototype.hasOwnProperty.call(datos, 'resultado') && datos.resultado === 'OK'){
+          this.consulta();
+          this.beditar=false;
+        }
+      });
+      this.mostrar(0);
+    } else{
+      const errors= this.form.errors
+      var mensaje= "Formulario no es valido\n"
+      mensaje+= JSON.stringify(errors)
+      alert(mensaje)
+    }
+  }
 }
-
-

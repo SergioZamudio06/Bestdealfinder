@@ -4,11 +4,13 @@ import { DashboardComponent } from './modulos/dashboard/dashboard.component';
 import { LoginComponent } from './modulos/login/login.component';
 import { PrincipalComponent } from './modulos/principal.component';
 import { UsuarioComponent } from './modulos/usuario/usuario.component';
+import { ValidaruserGuard } from './guards/validaruser.guard';
 
 
 const routes: Routes = [
   {
     path: "", component: PrincipalComponent,
+    canActivate: [ValidaruserGuard],
     children: [
       {path: "dashboard", component: DashboardComponent},
       {path: "usuario", component: UsuarioComponent},

@@ -42,7 +42,8 @@
   <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-3">
-  <button class="btn btn-primary" (click)="ingresar()" [disabled]="enviando">Guardar</button>
+  <button *ngIf="beditar==false" class="btn btn-primary" (click)="ingresar()" [disabled]="enviando">Guardar</button>
+  <button *ngIf="beditar==true" class="btn btn-primary" (click)="editar()">Editar</button>
   </div>
 
   <div class="col-lg-3">
@@ -79,9 +80,14 @@
     <td>{{item.Direccion}}</td>
 
     <td>
-      <span class="editar"><i class="fa-solid fa-pen-to-square"></i></span>
-      <span (click)="pregunta(item.id_usuario,item.Nombre)" class="eliminar"><i class="fa-solid fa-trash"></i></span>
-    </td>
+      <a (click)="cargardatos(item, item.id_usuario)" >
+        <span class="fas fa-edit editar" title="Editar"></span>
+      </a>
+
+      <a (click)="pregunta(item.id_usuario, item.Nombre)">
+         <span class="fas fa-trash-alt eliminar" title="Eliminar"></span>
+         </a>
+  </td>
 
    </tr>
   </table>
